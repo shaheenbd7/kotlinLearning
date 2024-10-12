@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class MyService: Service() {
 
-    private val TAG = "MyCoroutineService"
+    private val TAG = "MyService"
     private val serviceJob = Job()
     private val serviceScope = CoroutineScope(Dispatchers.IO + serviceJob)
 

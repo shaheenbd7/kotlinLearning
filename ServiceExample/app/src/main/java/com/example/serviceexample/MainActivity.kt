@@ -1,5 +1,6 @@
 package com.example.serviceexample
 
+import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,12 +11,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.serviceexample.ui.theme.ServiceExampleTheme
 
@@ -34,7 +33,21 @@ class MainActivity : ComponentActivity() {
                     onStopService = {
                         val intent = Intent(this, MyService::class.java)
                         stopService(intent) // Stop the service
-                    }
+                    },
+                    onStartForegroundService = {
+                        val serviceIntent = Intent(
+                            this,
+                            MyForegroundService::class.java
+                        )
+                        startForegroundService(serviceIntent)
+                    },
+//                    onStopForegroundService = {
+//                        val serviceIntent = Intent(
+//                            this,
+//                            MyForegroundService::class.java
+//                        )
+//                        (serviceIntent)
+//                    }
                 )
             }
         }
@@ -42,7 +55,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ServiceScreen(onStartService: () -> Unit, onStopService: () -> Unit) {
+fun ServiceScreen(
+    onStartService: () -> Unit,
+    onStopService: () -> Unit,
+    onStartForegroundService: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -51,10 +68,13 @@ fun ServiceScreen(onStartService: () -> Unit, onStopService: () -> Unit) {
         verticalArrangement = Arrangement.Center
     ) {
         Button(onClick = onStartService, modifier = Modifier.padding(bottom = 8.dp)) {
-            Text(text = "Start Service")
+            Text(text = "Start Background Service")
         }
         Button(onClick = onStopService) {
-            Text(text = "Stop Service")
+            Text(text = "Stop Background Service")
+        }
+        Button(onClick = onStartForegroundService) {
+            Text(text = "Start foreground Service")
         }
     }
 }
