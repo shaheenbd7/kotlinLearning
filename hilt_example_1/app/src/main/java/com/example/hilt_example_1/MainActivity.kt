@@ -8,17 +8,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.hilt_example_1.database.DatabaseAdapter
 import com.example.hilt_example_1.database.DatabaseService
 import com.example.hilt_example_1.ui.theme.Hilt_example_1Theme
@@ -28,8 +23,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @Inject lateinit var databaseAdapter: DatabaseAdapter
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @Inject
+    lateinit var databaseAdapter: DatabaseAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,14 +35,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Hilt_example_1Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()
-                ) {
-                    CenteredTextField()
-//                    Greeting(
-//                        name = "Android",
-//                        modifier = Modifier.padding(innerPadding)
-//                    )
-                }
+                CenteredTextField()
             }
         }
     }
