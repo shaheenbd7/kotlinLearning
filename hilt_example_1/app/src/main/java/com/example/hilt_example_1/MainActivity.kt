@@ -16,6 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.hilt_example_1.database.DatabaseAdapter
 import com.example.hilt_example_1.database.DatabaseService
+import com.example.hilt_example_1.network.MyAppNetworkAdapter
+import com.example.hilt_example_1.network.NetworkAdapter
 import com.example.hilt_example_1.ui.theme.Hilt_example_1Theme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -25,12 +27,16 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var databaseAdapter: DatabaseAdapter
+    @Inject lateinit var networkAdapter: NetworkAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
         Log.d(TAG, "onCreate: DatabaseAdapter: $databaseAdapter")
         databaseAdapter.log("Hello Hilt")
+
+        networkAdapter.log("interface binding")
 
         enableEdgeToEdge()
         setContent {
